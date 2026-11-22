@@ -1,4 +1,4 @@
-# Kiwi Ears Cadenza 2
+# Kiwi Ears Cadenza II
 
 [← Voltar ao ranking](../README.md)
 
@@ -8,22 +8,22 @@
 
 ## Resposta em frequência
 
-![Gráfico do Kiwi Ears Cadenza 2](../graficos/kiwi_ears_cadenza_2.png)
+![Gráfico do Kiwi Ears Cadenza II](../graficos/kiwi_ears_cadenza_ii.png)
 
 ## Avaliação do som
 
 | Banda | Desvio médio | Nota |
 | :--- | :---: | :---: |
-| Graves | 0.57 dB | 4.93 |
-| Médios | 0.74 dB | 4.76 |
-| Agudos | 2.64 dB | 2.86 |
-| **Média** | | **4.18** |
+| Graves | ~0.6 dB | 4.9 |
+| Médios | ~0.9 dB | 4.6 |
+| Agudos | ~3.6 dB | 1.9 |
+| **Média** | | **3.80** |
 
 | Desvio total (20 Hz–10 kHz) | Desvio máximo | Frequência do desvio máximo |
 | :---: | :---: | :---: |
-| 0.95 dB | 7.97 dB | 9.74 kHz |
+| ~1.4 dB | ~7.0 dB | ~6.5 kHz |
 
-*Desvio total, desvio máximo e sua frequência são informativos e não entram nas notas. O desvio total não é utilizado para atribuir as notas de Graves, Médios ou Agudos.*
+*Desvio total, desvio máximo e sua frequência são informativos e não entram nas notas. O desvio total não é utilizado para atribuir as notas de Graves, Médios ou Agudos. Valores de desvio estimados visualmente a partir da curva de resposta em frequência.*
 
 ## Minhas medições
 
@@ -51,8 +51,8 @@
 ## Nota geral
 
 | Graves | Médios | Agudos | Uso | **Geral** |
-| :---: | :---: | :---: | :---: | :---: |
-| 4.93 | 4.76 | 2.86 | 4.00 | **4.14** |
+| :----: | :----: | :----: | :-: | :-------: |
+|  4.9   |  4.6   |  1.9   |  4  | **3.85**  |
 
 *Geral = (Graves + Médios + Agudos + Uso) ÷ 4. As quatro notas pesam o mesmo, 25% cada. Por isso o som (graves, médios e agudos) responde por 75% da nota e o uso por 25%.*
 

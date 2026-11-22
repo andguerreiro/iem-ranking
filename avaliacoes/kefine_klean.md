@@ -2,9 +2,9 @@
 
 [← Voltar ao ranking](../README.md)
 
-| Preço | Assinatura | Configuração medida |
-| :---: | :---: | :--- |
-| USD 49 | Neutro quente | Filtro prata |
+| Preço  |  Assinatura   | Configuração medida |
+| :----: | :-----------: | :------------------ |
+| USD 49 | Neutro quente | Filtro prata        |
 
 ## Resposta em frequência
 
@@ -14,45 +14,45 @@
 
 | Banda | Desvio médio | Nota |
 | :--- | :---: | :---: |
-| Graves | 1.92 dB | 3.58 |
-| Médios | 0.90 dB | 4.60 |
-| Agudos | 1.70 dB | 3.80 |
-| **Média** | | **3.99** |
+| Graves | ~2.1 dB | 3.4 |
+| Médios | ~0.9 dB | 4.6 |
+| Agudos | ~2.1 dB | 3.4 |
+| **Média** | | **3.80** |
 
 | Desvio total (20 Hz–10 kHz) | Desvio máximo | Frequência do desvio máximo |
 | :---: | :---: | :---: |
-| 1.44 dB | 4.97 dB | 9.41 kHz |
+| ~1.7 dB | ~4.5 dB | ~6.5 kHz |
 
-*Desvio total, desvio máximo e sua frequência são informativos e não entram nas notas. O desvio total não é utilizado para atribuir as notas de Graves, Médios ou Agudos.*
+*Desvio total, desvio máximo e sua frequência são informativos e não entram nas notas. O desvio total não é utilizado para atribuir as notas de Graves, Médios ou Agudos. Valores de desvio estimados visualmente a partir da curva de resposta em frequência.*
 
 ## Minhas medições
 
-| Item | Medida |
-| :--- | :--- |
-| Massa por lado | 10 g |
-| Maior diâmetro do bocal | 6.3 mm |
+| Item                         | Medida  |
+| :--------------------------- | :------ |
+| Massa por lado               | 10 g    |
+| Maior diâmetro do bocal      | 6.3 mm  |
 | Maior comprimento da carcaça | 22.7 mm |
 
 *Medidos com balança e paquímetro digitais.*
 
 ## Avaliação do uso
 
-| # | Grupo | Item | Critério atende? | Nota |
-| :---: | :--- | :--- | :--- | :---: |
-| 1 | Bocal | Bocal compatível (≤ 6.0 mm) | Diâmetro máximo de até 6.0 mm. | 0 |
-| 2 | Conforto | Confortável após 60 minutos | Carcaça sem pressão, dor ou desconforto após 60 min. | 1 |
-| 3 | Cabo | Flexível e sem microfonia | Flexível, desenrola fácil e sem ruídos na roupa. | 1 |
-| 4 | Ponteiras | Silicone macio e flexível | Dobram ao meio facilmente com dois dedos. | 1 |
-| 5 | Reparo | Troca de cabo | Cabo removível e com conexão fácil de encontrar. | 1 |
-| **Soma** | | | | **4** |
+|    #     | Grupo     | Item                        | Critério atende?                                     | Nota  |
+| :------: | :-------- | :-------------------------- | :--------------------------------------------------- | :---: |
+|    1     | Bocal     | Bocal compatível (≤ 6.0 mm) | Diâmetro máximo de até 6.0 mm.                       |   0   |
+|    2     | Conforto  | Confortável após 60 minutos | Carcaça sem pressão, dor ou desconforto após 60 min. |   1   |
+|    3     | Cabo      | Flexível e sem microfonia   | Flexível, desenrola fácil e sem ruídos na roupa.     |   1   |
+|    4     | Ponteiras | Silicone macio e flexível   | Dobram ao meio facilmente com dois dedos.            |   0   |
+|    5     | Reparo    | Troca de cabo               | Cabo removível e com conexão fácil de encontrar.     |   1   |
+| **Soma** |           |                             |                                                      | **3** |
 
-**Extras (não entram na nota):** estojo e dois filtros para mudar a afinação.
+**Extras (não entram na nota):** estojo rígido e dois filtros para mudar a afinação.
 
 ## Nota geral
 
 | Graves | Médios | Agudos | Uso | **Geral** |
-| :---: | :---: | :---: | :---: | :---: |
-| 3.58 | 4.60 | 3.80 | 4.00 | **4.00** |
+| :----: | :----: | :----: | :-: | :-------: |
+|  3.4   |  4.6   |  3.4   |  3  | **3.60**  |
 
 *Geral = (Graves + Médios + Agudos + Uso) ÷ 4. As quatro notas pesam o mesmo, 25% cada. Por isso o som (graves, médios e agudos) responde por 75% da nota e o uso por 25%.*
 
@@ -67,7 +67,7 @@
 **Contras**
 
 - ❌ Bocal acima do meu limite de 6.0 mm.
-- ❌ Leve incômodo com o bocal após uso prolongado.
+- ❌ Ponteiras pouco flexíveis.
 - ❌ Graves acima do alvo.
 
 ## Especificações

@@ -12,18 +12,18 @@
 
 ## Avaliação do som
 
-| Banda | Desvio médio | Nota |
-| :--- | :---: | :---: |
-| Graves | 7.52 dB | 1.00 |
-| Médios | 2.16 dB | 3.34 |
-| Agudos | 4.77 dB | 1.00 |
-| **Média** | | **1.78** |
+| Banda     | Desvio médio |   Nota   |
+| :-------- | :----------: | :------: |
+| Graves    |   ~7.5 dB    |   1.0    |
+| Médios    |   ~2.2 dB    |   3.3    |
+| Agudos    |   ~4.8 dB    |   1.0    |
+| **Média** |              | **1.77** |
 
 | Desvio total (20 Hz–10 kHz) | Desvio máximo | Frequência do desvio máximo |
 | :---: | :---: | :---: |
-| 4.72 dB | 9.64 dB | 9.16 kHz |
+| ~4.7 dB | ~8.5 dB | ~8.0 kHz |
 
-*Desvio total, desvio máximo e sua frequência são informativos e não entram nas notas. O desvio total não é utilizado para atribuir as notas de Graves, Médios ou Agudos.*
+*Desvio total, desvio máximo e sua frequência são informativos e não entram nas notas. O desvio total não é utilizado para atribuir as notas de Graves, Médios ou Agudos. Valores de desvio estimados visualmente a partir da curva de resposta em frequência.*
 
 ## Minhas medições
 
@@ -51,8 +51,8 @@
 ## Nota geral
 
 | Graves | Médios | Agudos | Uso | **Geral** |
-| :---: | :---: | :---: | :---: | :---: |
-| 1.00 | 3.34 | 1.00 | 3.00 | **2.09** |
+| :----: | :----: | :----: | :-: | :-------: |
+|  1.0   |  3.3   |  1.0   |  3  | **2.08**  |
 
 *Geral = (Graves + Médios + Agudos + Uso) ÷ 4. As quatro notas pesam o mesmo, 25% cada. Por isso o som (graves, médios e agudos) responde por 75% da nota e o uso por 25%.*
 

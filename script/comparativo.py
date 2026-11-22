@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Lê avaliacoes/*.md e desvios.csv; gera comparativo.csv e o ranking do README.md."""
+"""Lê avaliacoes/*.md; gera comparativo.csv e atualiza o ranking do README.md."""
 
 import csv
 import io
@@ -9,15 +9,17 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 ARQ_README = RAIZ / "README.md"
-ARQ_DESVIOS = RAIZ / "desvios.csv"
 ARQ_COMPARATIVO = RAIZ / "comparativo.csv"
 DIR_AVALIACOES = RAIZ / "avaliacoes"
 
 ROTULOS = {"Graves": "Graves", "Medios": "Médios", "Agudos": "Agudos"}
 ROTULO_SOM = "Média"
 LIMITE_BOCAL_MM = 6.0
-TOL = 0.005 + 1e-9
-TOL_FREQ_HZ = 6
+TOL = 0.05 + 1e-9
+TOL_FREQ_HZ = 250
+
+NOTA_MAX, NOTA_MIN = 5.0, 1.0
+DESVIO_NOTA_MAX = 0.5
 
 ITENS_USO = [
     ("Bocal", "Bocal compatível (≤ 6.0 mm)"),
@@ -28,24 +30,14 @@ ITENS_USO = [
 ]
 ITEM_BOCAL = ITENS_USO[0]
 
-DESVIOS = {
-    "Desvio Graves (dB)": "Graves (dB)",
-    "Desvio Medios (dB)": "Medios (dB)",
-    "Desvio Agudos (dB)": "Agudos (dB)",
-    "Vies Graves (dB)": "Vies Graves (dB)",
-    "Vies Medios (dB)": "Vies Medios (dB)",
-    "Vies Agudos (dB)": "Vies Agudos (dB)",
-    "Desvio total (dB)": "Desvio total (dB)",
-    "Desvio maximo (dB)": "Desvio maximo (dB)",
-    "Freq. do desvio maximo (Hz)": "Freq. do desvio maximo (Hz)",
-}
-
 COLUNAS = [
     "Posicao", "IEM", "Assinatura", "Massa (g)", "Bocal (mm)",
-    "Carcaca (mm)",
-    "Preco (USD)", "Nota Graves", "Nota Medios", "Nota Agudos",
-    "Nota Som", "Uso Bocal", "Uso Conforto", "Uso Cabo", "Uso Ponteiras",
-    "Uso Reparo", "Nota Uso", "Nota geral", *DESVIOS,
+    "Carcaca (mm)", "Preco (USD)",
+    "Desvio Graves (dB)", "Desvio Medios (dB)", "Desvio Agudos (dB)",
+    "Desvio total (dB)", "Desvio maximo (dB)", "Freq. do desvio maximo (Hz)",
+    "Nota Graves", "Nota Medios", "Nota Agudos", "Nota Som",
+    "Uso Bocal", "Uso Conforto", "Uso Cabo", "Uso Ponteiras", "Uso Reparo",
+    "Nota Uso", "Nota geral",
 ]
 
 
@@ -58,17 +50,49 @@ def slug(nome):
 
 
 def numero(texto):
-    return float(str(texto).strip().replace(",", "."))
+    limpo = re.sub(r"^[~\s]+", "", str(texto).strip()).replace(",", ".")
+    return float(limpo)
 
 
-def valor(texto):
-    """'9.16 kHz' -> 9160.0; '2.5 dB' -> 2.5."""
-    numerico, _, unidade = texto.partition(" ")
-    return numero(numerico) * (1000 if unidade == "kHz" else 1)
+def valor_medida(texto):
+    """'~9.2 kHz' -> 9200.0; '~7.5 dB' -> 7.5; '~8.0 kHz / ~10.0 kHz' -> 8000.0."""
+    primeiro = str(texto).split("/")[0].strip()
+    m = re.match(
+        r"^[~\s]*(-?\d+(?:[.,]\d+)?)\s*(kHz|Hz|dB)?$",
+        primeiro,
+        re.IGNORECASE,
+    )
+    if not m:
+        raise ValueError(f"valor não numérico: '{texto}'")
+    num = float(m.group(1).replace(",", "."))
+    unidade = (m.group(2) or "").lower()
+    if unidade == "khz":
+        return num * 1000.0
+    return num
+
+
+def formatar_db(x):
+    return f"~{x:.1f}"
+
+
+def formatar_freq_hz(hz):
+    if hz >= 1000:
+        return f"~{hz / 1000:.1f} kHz"
+    return f"~{hz:.0f} Hz"
 
 
 def arredondar(x):
+    return f"{x + 1e-9:.1f}"
+
+
+def arredondar_geral(x):
     return f"{x + 1e-9:.2f}"
+
+
+def calcular_nota_banda(desvio):
+    if desvio <= DESVIO_NOTA_MAX:
+        return NOTA_MAX
+    return max(NOTA_MIN, NOTA_MAX + DESVIO_NOTA_MAX - desvio)
 
 
 def gravar_se_mudou(caminho, conteudo, encoding="utf-8"):
@@ -98,13 +122,9 @@ def secao(texto, titulo):
         rf"^##[ \t]+{re.escape(titulo)}[ \t]*\n"
         r"(.*?)(?=^##[ \t]|\Z)"
     )
-    resultado = re.search(
-        padrao, texto, re.MULTILINE | re.DOTALL
-    )
+    resultado = re.search(padrao, texto, re.MULTILINE | re.DOTALL)
     if not resultado:
-        raise AvaliacaoInvalida(
-            f"seção '## {titulo}' não encontrada"
-        )
+        raise AvaliacaoInvalida(f"seção '## {titulo}' não encontrada")
     return resultado.group(1)
 
 
@@ -127,49 +147,12 @@ def pendentes(texto):
     )
     n += len(re.findall(
         r"(?m)^(?:-[ \t]*[✅❌][ \t]*|\*\*Extras[^\n]*?:\*\*[ \t]*)X[ \t]*$",
-        texto
+        texto,
     ))
     n += len(re.findall(
         r"(?m)^\*Geral = \([^)]*\bX\b[^)]*\)", texto
     ))
     return n
-
-
-def ler_desvios():
-    if not ARQ_DESVIOS.is_file():
-        sys.exit(f"Arquivo não encontrado: '{ARQ_DESVIOS}'.")
-
-    leitor = csv.DictReader(
-        ARQ_DESVIOS.read_text(
-            encoding="utf-8-sig"
-        ).splitlines()
-    )
-
-    exigidas = {
-        "IEM",
-        *DESVIOS.values(),
-        *(f"Nota {b}" for b in ROTULOS),
-    }
-
-    faltando = exigidas - set(leitor.fieldnames or [])
-
-    if faltando:
-        sys.exit(
-            "desvios.csv com colunas ausentes ou formato antigo: "
-            f"{', '.join(sorted(faltando))}. "
-            "Rode scripts/graficos.py."
-        )
-
-    dados = {
-        l["IEM"].strip(): l
-        for l in leitor
-        if l["IEM"].strip()
-    }
-
-    if not dados:
-        sys.exit("Nenhum IEM encontrado em desvios.csv.")
-
-    return dados
 
 
 def ler_uso(texto):
@@ -184,9 +167,7 @@ def ler_uso(texto):
     lidos = dict(lidos_lista)
 
     if len(lidos) != len(lidos_lista):
-        raise AvaliacaoInvalida(
-            "item duplicado na tabela de uso"
-        )
+        raise AvaliacaoInvalida("item duplicado na tabela de uso")
 
     if set(lidos) != set(ITENS_USO):
         raise AvaliacaoInvalida(
@@ -196,11 +177,7 @@ def ler_uso(texto):
             f"{set(lidos) - set(ITENS_USO) or '-'}"
         )
 
-    invalidos = [
-        chave for chave, v in lidos.items()
-        if v not in ("0", "1")
-    ]
-
+    invalidos = [chave for chave, v in lidos.items() if v not in ("0", "1")]
     if invalidos:
         raise AvaliacaoInvalida(
             f"itens do uso devem ser 0 ou 1: {invalidos}"
@@ -208,24 +185,28 @@ def ler_uso(texto):
 
     soma_md = next(
         (numero(r[4]) for r in tabela if r[0] == "Soma"),
-        None
+        None,
     )
 
-    return {
-        chave: int(v) for chave, v in lidos.items()
-    }, soma_md
+    return {chave: int(v) for chave, v in lidos.items()}, soma_md
 
 
-def montar_linha(iem, d):
-    nome_md = f"{slug(iem)}.md"
-    caminho = DIR_AVALIACOES / nome_md
+def descobrir_avaliacoes():
+    if not DIR_AVALIACOES.is_dir():
+        sys.exit(f"Pasta não encontrada: '{DIR_AVALIACOES}'.")
 
-    if not caminho.is_file():
-        raise AvaliacaoInvalida(
-            f"arquivo '{caminho}' não encontrado"
-        )
+    arquivos = sorted(DIR_AVALIACOES.glob("*.md"))
+    if not arquivos:
+        sys.exit(f"Nenhuma avaliação (.md) encontrada em '{DIR_AVALIACOES}'.")
+    return arquivos
 
+
+def montar_linha(caminho):
+    nome_md = caminho.name
     texto = caminho.read_text(encoding="utf-8")
+
+    titulo_match = re.search(r"^#[ \t]+(.+)$", texto, re.MULTILINE)
+    iem = titulo_match.group(1).strip() if titulo_match else caminho.stem
 
     n = pendentes(texto)
     if n:
@@ -233,27 +214,22 @@ def montar_linha(iem, d):
             f"{n} campo(s) ainda com 'X' em {nome_md}"
         )
 
-    # Preço e assinatura são lidos diretamente do arquivo Markdown.
     preco_txt, assinatura = apos(
         linhas(texto), ["Preço", "Assinatura"]
     )[:2]
 
     assinatura = assinatura.strip()
-
     if not assinatura or assinatura == "X":
-        raise AvaliacaoInvalida(
-            f"assinatura não preenchida em {nome_md}"
-        )
+        raise AvaliacaoInvalida(f"assinatura não preenchida em {nome_md}")
 
     preco = numero(preco_txt.removeprefix("USD"))
 
     secao_geral = secao(texto, "Nota geral")
-
     graves_md, medios_md, agudos_md, uso_md, geral_md = map(
         numero,
         apos(
             linhas(secao_geral),
-            ["Graves", "Médios", "Agudos", "Uso", "Geral"]
+            ["Graves", "Médios", "Agudos", "Uso", "Geral"],
         )[:5],
     )
 
@@ -266,19 +242,13 @@ def montar_linha(iem, d):
     formula = re.search(
         r"^\*Geral = \(([^)]*)\) ÷ 4",
         secao_geral,
-        re.MULTILINE
+        re.MULTILINE,
     )
 
-    sec_bandas = linhas(
-        secao(texto, "Avaliação do som")
-    )
-
-    bandas_md = {
-        r[0]: r[1:] for r in sec_bandas
-    }
+    sec_bandas = linhas(secao(texto, "Avaliação do som"))
+    bandas_md = {r[0]: r[1:] for r in sec_bandas}
 
     som_linha = bandas_md.get(ROTULO_SOM, [])
-
     som_md = (
         numero(som_linha[1])
         if len(som_linha) > 1 and som_linha[1]
@@ -286,14 +256,10 @@ def montar_linha(iem, d):
     )
 
     total_md, max_md, freq_md = map(
-        valor,
+        valor_medida,
         apos(
             sec_bandas,
-            [
-                "Desvio total",
-                "Desvio máximo",
-                "Frequência"
-            ]
+            ["Desvio total", "Desvio máximo", "Frequência"],
         )[:3],
     )
 
@@ -307,19 +273,16 @@ def montar_linha(iem, d):
         medidas.get("Massa por lado", "")
         .partition(" ")[0].replace(",", ".")
     )
-
     bocal = (
         medidas.get("Maior diâmetro do bocal", "")
         .partition(" ")[0].replace(",", ".")
     )
-
     comprimento = (
         medidas.get("Maior comprimento da carcaça", "")
         .partition(" ")[0].replace(",", ".")
     )
 
     valores, soma_md = ler_uso(texto)
-
     soma_uso = sum(valores.values())
     uso = float(soma_uso)
 
@@ -334,17 +297,12 @@ def montar_linha(iem, d):
 
     if not massa:
         avisos.append("massa não encontrada.")
-
     if not comprimento:
         avisos.append("comprimento da carcaça não encontrado.")
-
     if not bocal:
         avisos.append("bocal não encontrado.")
     else:
-        esperado = int(
-            numero(bocal) <= LIMITE_BOCAL_MM
-        )
-
+        esperado = int(numero(bocal) <= LIMITE_BOCAL_MM)
         if valores[ITEM_BOCAL] != esperado:
             avisos.append(
                 f"'{ITEM_BOCAL[1]}' está {valores[ITEM_BOCAL]}, "
@@ -353,62 +311,38 @@ def montar_linha(iem, d):
             )
 
     if soma_md is None:
-        avisos.append(
-            "linha Soma ausente na tabela de uso."
-        )
+        avisos.append("linha Soma ausente na tabela de uso.")
     else:
         comparar("soma do uso", soma_md, soma_uso, 0)
 
+    desvios_bandas = {}
     notas = {}
 
     for banda, rotulo in ROTULOS.items():
-        desvio_txt, nota_txt = bandas_md[rotulo]
+        if rotulo not in bandas_md or len(bandas_md[rotulo]) < 2:
+            raise AvaliacaoInvalida(
+                f"banda '{rotulo}' ausente ou incompleta em {nome_md}"
+            )
+        desvio_txt, nota_txt = bandas_md[rotulo][:2]
+        desvio_val = valor_medida(desvio_txt)
+        desvios_bandas[banda] = desvio_val
 
-        notas[banda] = numero(d[f"Nota {banda}"])
+        nota_calc = calcular_nota_banda(desvio_val)
+        notas[banda] = nota_calc
 
-        comparar(
-            f"nota de {banda}",
-            numero(nota_txt),
-            notas[banda]
-        )
-
+        comparar(f"nota de {banda}", numero(nota_txt), nota_calc)
         comparar(
             f"nota de {banda} em Nota geral",
             notas_resumo[banda],
-            notas[banda]
+            nota_calc,
         )
-
-        comparar(
-            f"desvio de {banda}",
-            valor(desvio_txt),
-            numero(d[f"{banda} (dB)"])
-        )
-
-    total = numero(d["Desvio total (dB)"])
-
-    comparar("desvio total", total_md, total)
-
-    comparar(
-        "desvio máximo",
-        max_md,
-        numero(d["Desvio maximo (dB)"])
-    )
-
-    comparar(
-        "frequência do desvio máximo",
-        freq_md,
-        numero(d["Freq. do desvio maximo (Hz)"]),
-        TOL_FREQ_HZ,
-    )
 
     som = sum(notas.values()) / 3
     pontos = sum(notas.values()) + uso
     geral = pontos / 4
 
     if som_md is None:
-        avisos.append(
-            f"linha '{ROTULO_SOM}' ausente na tabela de bandas."
-        )
+        avisos.append(f"linha '{ROTULO_SOM}' ausente na tabela de bandas.")
     else:
         comparar("Nota Som", som_md, som)
 
@@ -417,8 +351,7 @@ def montar_linha(iem, d):
 
     if not formula:
         avisos.append(
-            "fórmula '*Geral = (...) ÷ 4' "
-            "ausente na seção Nota geral."
+            "fórmula '*Geral = (...) ÷ 4' ausente na seção Nota geral."
         )
     else:
         valores_esperados = {
@@ -427,12 +360,7 @@ def montar_linha(iem, d):
             "Agudos": notas["Agudos"],
             "Uso": uso,
         }
-
-        termos = [
-            t.strip()
-            for t in formula.group(1).split("+")
-        ]
-
+        termos = [t.strip() for t in formula.group(1).split("+")]
         if len(termos) != 4:
             avisos.append(
                 f"fórmula da Nota geral no .md "
@@ -442,17 +370,14 @@ def montar_linha(iem, d):
             for termo in termos:
                 if termo in valores_esperados:
                     continue
-
                 try:
                     valor_termo = numero(termo)
                 except ValueError:
                     avisos.append(
                         f"fórmula da Nota geral no .md "
-                        f"({formula.group(1)}) contém "
-                        f"termo inválido: '{termo}'."
+                        f"({formula.group(1)}) contém termo inválido: '{termo}'."
                     )
                     break
-
                 if valor_termo not in valores_esperados.values():
                     avisos.append(
                         f"fórmula da Nota geral no .md "
@@ -472,10 +397,13 @@ def montar_linha(iem, d):
         "Bocal (mm)": bocal,
         "Carcaca (mm)": comprimento,
         "Preco (USD)": f"{preco:g}",
-        **{
-            f"Nota {b}": f"{n:.2f}"
-            for b, n in notas.items()
-        },
+        "Desvio Graves (dB)": formatar_db(desvios_bandas["Graves"]),
+        "Desvio Medios (dB)": formatar_db(desvios_bandas["Medios"]),
+        "Desvio Agudos (dB)": formatar_db(desvios_bandas["Agudos"]),
+        "Desvio total (dB)": formatar_db(total_md),
+        "Desvio maximo (dB)": formatar_db(max_md),
+        "Freq. do desvio maximo (Hz)": formatar_freq_hz(freq_md),
+        **{f"Nota {b}": f"{n:.1f}" for b, n in notas.items()},
         "Nota Som": arredondar(som),
         "Uso Bocal": valores[ITENS_USO[0]],
         "Uso Conforto": valores[ITENS_USO[1]],
@@ -483,18 +411,14 @@ def montar_linha(iem, d):
         "Uso Ponteiras": valores[ITENS_USO[3]],
         "Uso Reparo": valores[ITENS_USO[4]],
         "Nota Uso": arredondar(uso),
-        "Nota geral": arredondar(geral),
-        **{
-            coluna: d[origem]
-            for coluna, origem in DESVIOS.items()
-        },
+        "Nota geral": arredondar_geral(geral),
     }
 
     return (
         -float(linha["Nota geral"]),
         preco,
-        total,
-        iem.lower()
+        total_md,
+        iem.lower(),
     ), linha
 
 
@@ -526,9 +450,7 @@ def atualizar_readme(linhas_csv):
     )
 
     if not n:
-        sys.exit(
-            "Marcas RANKING não encontradas no README."
-        )
+        sys.exit("Marcas RANKING não encontradas no README.")
 
     if gravar_se_mudou(ARQ_README, novo):
         print(f"Ranking atualizado em {ARQ_README}.")
@@ -541,32 +463,23 @@ def main():
 
     resultados, erros = [], []
 
-    for iem, d in ler_desvios().items():
+    for caminho in descobrir_avaliacoes():
+        iem = caminho.stem
         try:
-            resultados.append(montar_linha(iem, d))
-        except (
-            AvaliacaoInvalida,
-            KeyError,
-            ValueError
-        ) as erro:
+            resultados.append(montar_linha(caminho))
+        except (AvaliacaoInvalida, KeyError, ValueError) as erro:
             motivo = (
                 erro
                 if isinstance(erro, AvaliacaoInvalida)
                 else f"dado ausente ou inválido ({erro!r})"
             )
-
             erros.append(iem)
-            print(
-                f"[ERRO] {iem}: {motivo}. Fora do ranking."
-            )
+            print(f"[ERRO] {iem}: {motivo}. Fora do ranking.")
 
     if not resultados:
-        sys.exit(
-            "Nenhuma avaliação válida; nada foi gerado."
-        )
+        sys.exit("Nenhuma avaliação válida; nada foi gerado.")
 
     linhas_csv = []
-
     for posicao, (_, linha) in enumerate(
         sorted(resultados, key=lambda r: r[0]), 1
     ):
@@ -574,24 +487,20 @@ def main():
         linhas_csv.append(linha)
 
     buffer = io.StringIO()
-
     escritor = csv.DictWriter(
         buffer,
         fieldnames=COLUNAS,
-        lineterminator="\n"
+        lineterminator="\n",
     )
-
     escritor.writeheader()
     escritor.writerows(linhas_csv)
 
     if gravar_se_mudou(
         ARQ_COMPARATIVO,
         buffer.getvalue(),
-        "utf-8-sig"
+        "utf-8-sig",
     ):
-        print(
-            f"Comparativo salvo ({len(linhas_csv)} IEMs)."
-        )
+        print(f"Comparativo salvo ({len(linhas_csv)} IEMs).")
     else:
         print("comparativo.csv já estava atualizado.")
 

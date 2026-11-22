@@ -1,4 +1,4 @@
-# Truthear Zero Red
+# Truthear x Crinacle Zero Red
 
 [← Voltar ao ranking](../README.md)
 
@@ -8,22 +8,22 @@
 
 ## Resposta em frequência
 
-![Gráfico do Truthear Zero Red](../graficos/truthear_zero_red.png)
+![Gráfico do Truthear x Crinacle Zero Red](../graficos/truthear_x_crinacle_zero_red.png)
 
 ## Avaliação do som
 
 | Banda | Desvio médio | Nota |
 | :--- | :---: | :---: |
-| Graves | 1.33 dB | 4.17 |
-| Médios | 0.76 dB | 4.74 |
-| Agudos | 2.75 dB | 2.75 |
-| **Média** | | **3.89** |
+| Graves | ~0.8 dB | 4.7 |
+| Médios | ~0.7 dB | 4.8 |
+| Agudos | ~2.7 dB | 2.8 |
+| **Média** | | **4.10** |
 
 | Desvio total (20 Hz–10 kHz) | Desvio máximo | Frequência do desvio máximo |
 | :---: | :---: | :---: |
-| 1.28 dB | 4.63 dB | 9.95 kHz |
+| ~1.3 dB | ~6.0 dB | ~6.3 kHz |
 
-*Desvio total, desvio máximo e sua frequência são informativos e não entram nas notas. O desvio total não é utilizado para atribuir as notas de Graves, Médios ou Agudos.*
+*Desvio total, desvio máximo e sua frequência são informativos e não entram nas notas. O desvio total não é utilizado para atribuir as notas de Graves, Médios ou Agudos. Valores de desvio estimados visualmente a partir da curva de resposta em frequência.*
 
 ## Minhas medições
 
@@ -51,8 +51,8 @@
 ## Nota geral
 
 | Graves | Médios | Agudos | Uso | **Geral** |
-| :---: | :---: | :---: | :---: | :---: |
-| 4.17 | 4.74 | 2.75 | 2.00 | **3.42** |
+| :----: | :----: | :----: | :-: | :-------: |
+|  4.7   |  4.8   |  2.8   |  2  | **3.58**  |
 
 *Geral = (Graves + Médios + Agudos + Uso) ÷ 4. As quatro notas pesam o mesmo, 25% cada. Por isso o som (graves, médios e agudos) responde por 75% da nota e o uso por 25%.*
 
@@ -72,17 +72,17 @@
 
 ## Especificações
 
-| Item | Informação |
-| :--- | :--- |
-| Drivers | 10 mm + 7.8 mm |
-| Quantidade por lado | 2 |
-| Tecnologia | Dois drivers dinâmicos com diafragmas em PU + LCP |
-| Carcaça | Resina impressa em 3D |
-| Conexão do cabo | 0.78 mm, 2 pinos |
-| Plug | 3.5 mm |
-| Faixa de frequência | 20 Hz–40.5 kHz |
-| Impedância | 17.5 Ω |
-| Sensibilidade | 117.5 dB/Vrms |
+| Item                | Informação                                        |
+| :------------------ | :------------------------------------------------ |
+| Drivers             | 10 mm + 7.8 mm                                    |
+| Quantidade por lado | 2                                                 |
+| Tecnologia          | Dois drivers dinâmicos com diafragmas em PU + LCP |
+| Carcaça             | Resina impressa em 3D                             |
+| Conexão do cabo     | 0.78 mm, 2 pinos                                  |
+| Plug                | 3.5 mm                                            |
+| Faixa de frequência | 20 Hz–40.5 kHz                                    |
+| Impedância          | 17.5 Ω                                            |
+| Sensibilidade       | 117.5 dB/Vrms                                     |
 
 ## Como avalio
 

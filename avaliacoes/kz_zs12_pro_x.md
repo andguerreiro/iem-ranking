@@ -2,9 +2,9 @@
 
 [← Voltar ao ranking](../README.md)
 
-| Preço | Assinatura | Configuração medida |
-| :---: | :---: | :--- |
-| USD 50 | Em U | Chaves em 1110 |
+| Preço  |    Assinatura    | Configuração medida |
+| :----: | :--------------: | :------------------ |
+| USD 50 | Neutro brilhante | Chaves em 1110      |
 
 ## Resposta em frequência
 
@@ -14,16 +14,16 @@
 
 | Banda | Desvio médio | Nota |
 | :--- | :---: | :---: |
-| Graves | 0.75 dB | 4.75 |
-| Médios | 1.00 dB | 4.50 |
-| Agudos | 4.55 dB | 1.00 |
-| **Média** | | **3.42** |
+| Graves | ~0.9 dB | 4.6 |
+| Médios | ~1.3 dB | 4.2 |
+| Agudos | ~4.6 dB | 1.0 |
+| **Média** | | **3.27** |
 
 | Desvio total (20 Hz–10 kHz) | Desvio máximo | Frequência do desvio máximo |
-| :---: | :---: | :---: |
-| 1.42 dB | 7.73 dB | 8.60 kHz |
+| :-------------------------: | :-----------: | :-------------------------: |
+|           ~1.7 dB           |    ~8.0 dB    |          ~8.5 kHz           |
 
-*Desvio total, desvio máximo e sua frequência são informativos e não entram nas notas. O desvio total não é utilizado para atribuir as notas de Graves, Médios ou Agudos.*
+*Desvio total, desvio máximo e sua frequência são informativos e não entram nas notas. O desvio total não é utilizado para atribuir as notas de Graves, Médios ou Agudos. Valores de desvio estimados visualmente a partir da curva de resposta em frequência.*
 
 ## Minhas medições
 
@@ -51,8 +51,8 @@
 ## Nota geral
 
 | Graves | Médios | Agudos | Uso | **Geral** |
-| :---: | :---: | :---: | :---: | :---: |
-| 4.75 | 4.50 | 1.00 | 3.00 | **3.31** |
+| :----: | :----: | :----: | :-: | :-------: |
+|  4.6   |  4.2   |  1.0   |  3  | **3.20**  |
 
 *Geral = (Graves + Médios + Agudos + Uso) ÷ 4. As quatro notas pesam o mesmo, 25% cada. Por isso o som (graves, médios e agudos) responde por 75% da nota e o uso por 25%.*
 
@@ -68,21 +68,21 @@
 
 - ❌ Falha de volume na unidade que recebi.
 - ❌ Agudos irregulares.
-- ❌ Pico de 7.73 dB em 8.60 kHz.
+- ❌ Pico de ~8.0 dB em ~8.5 kHz.
 
 ## Especificações
 
-| Item | Informação |
-| :--- | :--- |
-| Drivers | Dinâmico de 10 mm + armaduras balanceadas |
-| Quantidade por lado | 6 (1 dinâmico e 5 armaduras balanceadas) |
-| Tecnologia | Híbrida |
-| Carcaça | Liga de zinco |
-| Conexão do cabo | 0.75 mm, 2 pinos, tipo C/QDC |
-| Plug | 3.5 mm |
-| Faixa de frequência | 20 Hz–40 kHz |
-| Impedância | 25 Ω |
-| Sensibilidade | 106 dB |
+| Item                | Informação                                |
+| :------------------ | :---------------------------------------- |
+| Drivers             | Dinâmico de 10 mm + armaduras balanceadas |
+| Quantidade por lado | 6 (1 dinâmico e 5 armaduras balanceadas)  |
+| Tecnologia          | Híbrida                                   |
+| Carcaça             | Liga de zinco                             |
+| Conexão do cabo     | 0.75 mm, 2 pinos, tipo C/QDC              |
+| Plug                | 3.5 mm                                    |
+| Faixa de frequência | 20 Hz–40 kHz                              |
+| Impedância          | 25 Ω                                      |
+| Sensibilidade       | 106 dB                                    |
 
 ## Como avalio
 

@@ -2,9 +2,9 @@
 
 [← Voltar ao ranking](../README.md)
 
-| Preço | Assinatura | Configuração medida |
-| :---: | :---: | :--- |
-| USD 10 | Em V | Única (sem filtros ou chaves) |
+| Preço  | Assinatura | Configuração medida           |
+| :----: | :--------: | :---------------------------- |
+| USD 10 |    Em V    | Única (sem filtros ou chaves) |
 
 ## Resposta em frequência
 
@@ -12,18 +12,18 @@
 
 ## Avaliação do som
 
-| Banda | Desvio médio | Nota |
-| :--- | :---: | :---: |
-| Graves | 2.76 dB | 2.74 |
-| Médios | 1.18 dB | 4.32 |
-| Agudos | 1.97 dB | 3.53 |
-| **Média** | | **3.53** |
+| Banda     | Desvio médio |   Nota   |
+| :-------- | :----------: | :------: |
+| Graves    |   ~2.9 dB    |   2.6    |
+| Médios    |   ~1.1 dB    |   4.4    |
+| Agudos    |   ~2.7 dB    |   2.8    |
+| **Média** |              | **3.27** |
 
 | Desvio total (20 Hz–10 kHz) | Desvio máximo | Frequência do desvio máximo |
-| :---: | :---: | :---: |
-| 1.94 dB | 8.99 dB | 8.08 kHz |
+| :-------------------------: | :-----------: | :-------------------------: |
+|           ~2.1 dB           |    ~9.5 dB    |          ~8.0 kHz           |
 
-*Desvio total, desvio máximo e sua frequência são informativos e não entram nas notas. O desvio total não é utilizado para atribuir as notas de Graves, Médios ou Agudos.*
+*Desvio total, desvio máximo e sua frequência são informativos e não entram nas notas. O desvio total não é utilizado para atribuir as notas de Graves, Médios ou Agudos. Valores de desvio estimados visualmente a partir da curva de resposta em frequência.*
 
 ## Minhas medições
 
@@ -51,8 +51,8 @@
 ## Nota geral
 
 | Graves | Médios | Agudos | Uso | **Geral** |
-| :---: | :---: | :---: | :---: | :---: |
-| 2.74 | 4.32 | 3.53 | 3.00 | **3.40** |
+| :----: | :----: | :----: | :-: | :-------: |
+|  2.6   |  4.4   |  2.8   |  3  | **3.20**  |
 
 *Geral = (Graves + Médios + Agudos + Uso) ÷ 4. As quatro notas pesam o mesmo, 25% cada. Por isso o som (graves, médios e agudos) responde por 75% da nota e o uso por 25%.*
 

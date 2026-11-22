@@ -1,4 +1,4 @@
-# Meus IEMs: avaliações pessoais
+# Ranking dos Meus IEMs
 
 Avalio apenas os IEMs que comprei e usei. As notas refletem minha experiência e meus critérios pessoais, não uma classificação definitiva.
 
@@ -7,34 +7,31 @@ Avalio apenas os IEMs que comprei e usei. As notas refletem minha experiência e
 <!-- RANKING:INICIO -->
 | Posição | IEM | Assinatura | Preço (USD) | Nota geral |
 | :---: | :--- | :--- | :---: | :---: |
-| 1º | [Kiwi Ears Cadenza 2](avaliacoes/kiwi_ears_cadenza_2.md) | Neutro | 50 | 4.14 |
-| 2º | [Kefine Klean](avaliacoes/kefine_klean.md) | Neutro quente | 49 | 4.00 |
-| 3º | [KZ Castor Prata](avaliacoes/kz_castor_prata.md) | Neutro | 15 | 3.75 |
-| 4º | [Sennheiser IE 100 Pro](avaliacoes/sennheiser_ie_100_pro.md) | Magro | 100 | 3.53 |
-| 5º | [Truthear Zero Red](avaliacoes/truthear_zero_red.md) | Neutro | 55 | 3.42 |
-| 6º | [KZ EDX Pro X](avaliacoes/kz_edx_pro_x.md) | Em V | 10 | 3.40 |
-| 7º | [KZ ZS12 Pro X](avaliacoes/kz_zs12_pro_x.md) | Em U | 50 | 3.31 |
-| 8º | [JBL Tune 110](avaliacoes/jbl_tune_110.md) | Baixudo | 15 | 2.09 |
+| 1º | [Kiwi Ears Cadenza II](avaliacoes/kiwi_ears_cadenza_ii.md) | Neutro | 50 | 3.85 |
+| 2º | [KZ Castor Prata](avaliacoes/kz_castor_prata.md) | Neutro brilhante | 15 | 3.75 |
+| 3º | [Kefine Klean](avaliacoes/kefine_klean.md) | Neutro quente | 49 | 3.60 |
+| 4º | [Moondrop Chu II](avaliacoes/moondrop_chu_ii.md) | Neutro quente | 23 | 3.58 |
+| 5º | [Truthear x Crinacle Zero Red](avaliacoes/truthear_x_crinacle_zero_red.md) | Neutro | 55 | 3.58 |
+| 6º | [KZ EDX Pro X](avaliacoes/kz_edx_pro_x.md) | Em V | 10 | 3.20 |
+| 7º | [KZ ZS12 Pro X](avaliacoes/kz_zs12_pro_x.md) | Neutro brilhante | 50 | 3.20 |
+| 8º | [Sennheiser IE 100 Pro](avaliacoes/sennheiser_ie_100_pro.md) | Quente | 100 | 3.13 |
+| 9º | [JBL Tune 110](avaliacoes/jbl_tune_110.md) | Baixudo | 15 | 2.08 |
 <!-- RANKING:FIM -->
 
-*Em caso de empate, prevalecem o menor preço e, depois, o menor desvio total.*
+*A nota máxima é 5. Em caso de empate, prevalecem o menor preço e, depois, o menor desvio total.*
 
 ## Como avalio
 
-A Nota Geral considera quatro componentes:
+A Nota Geral considera dois componentes com pesos diferentes:
 
-- Graves
-- Médios
-- Agudos
-- Uso
-
-Graves, médios, agudos e uso têm o mesmo peso na Nota Geral. Assim, o som representa 75% da nota e o uso, 25%.
+- Som (75%)
+- Uso (25%)
 
 ### Som
 
-Graves, médios e agudos são avaliados com base em medições de resposta em frequência, comparadas à curva [Harman IE 2019](target/HarmanIE2019.txt), adotada como referência de preferência neste projeto.
+Graves, médios e agudos são avaliados com base em gráficos de resposta em frequência obtidos no [squig.link](https://squig.link/), comparados à curva alvo Harman IE 2019.
 
-A nota de cada banda depende do desvio médio em relação ao alvo e cai de forma contínua, sem degraus: cada 1 dB de desvio tira 1 ponto.
+Os desvios médios por banda são estimados visualmente por LLM a partir da comparação entre a curva do IEM e a linha alvo no gráfico, com uma casa decimal. A nota de cada banda depende do desvio médio em relação ao alvo e cai de forma contínua, sem degraus: cada 1 dB de desvio tira 1 ponto.
 
 | Desvio médio | Nota |
 | :--- | :---: |
@@ -42,7 +39,7 @@ A nota de cada banda depende do desvio médio em relação ao alvo e cai de form
 | Entre 0.5 e 4.5 dB | 5.5 − desvio |
 | A partir de 4.5 dB | 1 |
 
-Por exemplo, um desvio médio de 1.92 dB resulta em nota 3.58. A conta é feita pelos scripts a partir do desvio exibido com duas casas.
+Por exemplo, um desvio médio estimado de 1.9 dB resulta em nota 3.6.
 
 As bandas avaliadas são:
 
@@ -54,7 +51,7 @@ Desvios para cima e para baixo recebem o mesmo peso. Frequências acima de 10 kH
 
 ### Uso
 
-A Nota Uso considera minha experiência com o bocal, a carcaça, o conforto, o cabo e as ponteiras, além da possibilidade de trocar o cabo.
+Considera minha experiência com o bocal, a carcaça, o conforto, o cabo e as ponteiras, além da possibilidade de trocar o cabo.
 
 São avaliados 5 itens, cada um valendo 0 ou 1 ponto:
 
@@ -80,30 +77,30 @@ Construção, embalagem, estojo e acessórios extras são comentados nas avalia�
 
 ## Assinatura sonora
 
-A assinatura descreve o perfil tonal de cada IEM, classificado visualmente pelos gráficos gerados pelo script `graficos.py`.
+A assinatura descreve o perfil tonal de cada IEM, classificado visualmente pelos gráficos de resposta em frequência.
 
 Cada IEM recebe uma única classificação, escolhida entre:
 
-| Assinatura | Característica |
-|---|---|
-| Neutro | Equilíbrio tonal geral. |
-| Neutro quente | Equilíbrio tonal com leve ênfase nos graves e médios-baixos. |
-| Neutro brilhante | Equilíbrio tonal com leve ênfase nos agudos. |
-| Quente | Graves e médios-baixos em evidência, com maior corpo sonoro. |
-| Baixudo | Forte predominância dos graves. |
-| Em U | Graves e agudos destacados, com médios relativamente preservados. |
-| Em V | Graves e agudos destacados, com médios recuados. |
-| Brilhante | Agudos claramente em evidência. |
-| Escuro | Agudos atenuados, com apresentação mais sombreada. |
-| Suave | Apresentação sem picos ou excessos agressivos nos agudos. |
-| Magro | Pouco peso nos graves e menor corpo sonoro. |
-| Focado nos médios | Médios e vocais em evidência. |
+| Assinatura        | Característica                                                    |
+| ----------------- | ----------------------------------------------------------------- |
+| Neutro            | Equilíbrio tonal geral.                                           |
+| Neutro quente     | Equilíbrio tonal com leve ênfase nos graves e médios-baixos.      |
+| Neutro brilhante  | Equilíbrio tonal com leve ênfase nos agudos.                      |
+| Quente            | Graves e médios-baixos em evidência, com maior corpo sonoro.      |
+| Baixudo           | Forte predominância dos graves.                                   |
+| Em U              | Graves e agudos destacados, com médios relativamente preservados. |
+| Em V              | Graves e agudos destacados, com médios recuados.                  |
+| Brilhante         | Agudos claramente em evidência.                                   |
+| Escuro            | Agudos atenuados, com apresentação mais sombreada.                |
+| Suave             | Apresentação sem picos ou excessos agressivos nos agudos.         |
+| Magro             | Pouco peso nos graves e menor corpo sonoro.                       |
+| Focado nos médios | Médios e vocais em evidência.                                     |
 
 A classificação é subjetiva e considera o formato geral da curva.
 
 ## Medições e limitações
 
-As curvas de resposta em frequência vêm de medições publicadas no [squig.link](https://squig.link/). Os arquivos utilizados estão na pasta [medicoes/](medicoes/).
+As curvas de resposta em frequência vêm de gráficos publicados no [squig.link](https://squig.link/), salvos em [graficos/](graficos/), com registro da fonte e do equipamento (*rig*) utilizado em cada medição (como clones IEC 711 / IEC60318-4 ou B&K Type 5128).
 
 As medições físicas, como peso, maior diâmetro do bocal e maior comprimento da carcaça, são feitas por mim com balança e paquímetro digitais.
 
@@ -111,6 +108,7 @@ As especificações técnicas são obtidas dos fabricantes.
 
 **Limitações:**
 
+- Como os desvios são estimados visualmente a partir dos gráficos sem processamento de dados brutos, há margem de imprecisão visual e variação conforme o *rig* de medição e a escala/alinhamento exibidos.
 - As medições podem variar conforme o equipamento, a unidade e as condições de teste.
 - Os resultados são especialmente sensíveis ao posicionamento do IEM nos graves profundos e nos agudos. Os agudos (4 a 10 kHz) são a região menos confiável, então as notas de Agudos merecem mais cautela que as de Graves e Médios.
 - A proximidade da curva Harman não representa, por si só, qualidade sonora absoluta.
@@ -122,41 +120,21 @@ As especificações técnicas são obtidas dos fabricantes.
 
 | Caminho | Conteúdo |
 | :--- | :--- |
-| [avaliacoes/](avaliacoes/) | Avaliações individuais |
-| [medicoes/](medicoes/) | Curvas de resposta em frequência |
-| [graficos/](graficos/) | Resposta em frequência de cada IEM contra o alvo |
-| [target/](target/) | Curva Harman IE 2019 |
-| [comparativo.csv](comparativo.csv) | Ranking e notas consolidadas |
-| [desvios.csv](desvios.csv) | Resultados das medições |
-| [scripts/](scripts/) | Scripts de cálculo e geração de gráficos |
-
-## Dependências
-
-Os scripts usam Python 3 com as bibliotecas `matplotlib` e `numpy`. Para instalar:
-
-```bash
-pip install matplotlib numpy
-```
+| [avaliacoes/](avaliacoes/) | Avaliações individuais (`*.md`), fonte principal dos dados e notas |
+| [graficos/](graficos/) | Gráficos de resposta em frequência salvos a partir do squig.link |
+| [comparativo.csv](comparativo.csv) | Ranking e notas consolidadas gerados pelo `comparativo.py` |
+| [script/](script/) | Script de consolidação e atualização do ranking (`comparativo.py`) |
 
 ## Atualização do projeto
 
-Execute os comandos na raiz do projeto.
+Execute o comando na raiz do projeto após editar ou adicionar avaliações em `avaliacoes/`:
 
-**Atualizar medições e gráficos:**
+    python3 script/comparativo.py
 
-```bash
-python3 scripts/graficos.py
-```
-
-**Atualizar o ranking e o comparativo:**
-
-```bash
-python3 scripts/comparativo.py
-```
+O script lê os arquivos em `avaliacoes/`, confere os cálculos, gera o `comparativo.csv` e atualiza o ranking deste `README.md`.
 
 ## Adicionar um IEM
 
-1. Coloque a medição na pasta `medicoes/`.
-2. Execute `python3 scripts/graficos.py` para gerar os gráficos e a avaliação inicial, já com os desvios calculados.
-3. Preencha os campos restantes (marcados com `X`) e os 5 critérios de uso no arquivo gerado em `avaliacoes/`.
-4. Execute `python3 scripts/comparativo.py` para conferir os dados e atualizar o ranking.
+1. Obtenha o gráfico da medição no [squig.link](https://squig.link/) e salve em `graficos/`, registrando a fonte e o *rig* de medição.
+2. Crie a avaliação em `avaliacoes/<slug>.md` preenchendo os desvios estimados visualmente, as notas, as medições físicas, os 5 critérios de uso, o resumo e as especificações.
+3. Execute `python3 script/comparativo.py` na raiz do projeto para gerar o `comparativo.csv` e atualizar o ranking no `README.md`.
