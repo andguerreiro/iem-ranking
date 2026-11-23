@@ -2,9 +2,9 @@
 
 [← Voltar ao ranking](../README.md)
 
-| Preço  |  Assinatura   | Configuração medida |
-| :----: | :-----------: | :------------------ |
-| USD 49 | Neutro quente | Filtro prata        |
+| Preço | Quanto paguei | Assinatura | Configuração medida |
+| :---: | :---: | :---: | :--- |
+| USD 49 | R$ 300 | Neutro quente | Filtro prata        |
 
 ## Resposta em frequência
 
