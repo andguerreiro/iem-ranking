@@ -4,7 +4,7 @@
 
 | Preço | Quanto paguei | Assinatura | Configuração medida |
 | :---: | :---: | :---: | :--- |
-| USD 15 | R$ 89 | Baixudo | Única (cabo fixo, sem filtros ou chaves) |
+| USD 15 | R$ 89 (Loja física de acessórios) | Baixudo | Única (cabo fixo, sem filtros ou chaves) |
 
 ## Resposta em frequência
 
