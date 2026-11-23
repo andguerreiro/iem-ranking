@@ -4,7 +4,7 @@
 
 | Preço | Quanto paguei | Assinatura | Configuração medida |
 | :---: | :---: | :---: | :--- |
-| USD 15 | R$ 102 | Neutro brilhante | Chaves em 1100 |
+| USD 15 | R$ 102 (Mercado Livre) | Neutro brilhante | Chaves em 1100 |
 
 ## Resposta em frequência
 
