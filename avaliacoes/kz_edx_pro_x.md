@@ -2,9 +2,9 @@
 
 [← Voltar ao ranking](../README.md)
 
-| Preço  | Assinatura | Configuração medida           |
-| :----: | :--------: | :---------------------------- |
-| USD 10 |    Em V    | Única (sem filtros ou chaves) |
+| Preço | Quanto paguei | Assinatura | Configuração medida |
+| :---: | :---: | :---: | :--- |
+| USD 10 | R$ 69 | Em V | Única (sem filtros ou chaves) |
 
 ## Resposta em frequência
 
