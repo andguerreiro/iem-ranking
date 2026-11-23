@@ -4,7 +4,7 @@
 
 | Preço | Quanto paguei | Assinatura | Configuração medida |
 | :---: | :---: | :---: | :--- |
-| USD 100 | R$ 1065 | Quente | Única (sem filtros ou chaves) |
+| USD 100 | R$ 1065 (Sennheiser) | Quente | Única (sem filtros ou chaves) |
 
 ## Resposta em frequência
 
