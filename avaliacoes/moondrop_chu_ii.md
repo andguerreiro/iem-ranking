@@ -2,9 +2,9 @@
 
 [← Voltar ao ranking](../README.md)
 
-| Preço  |  Assinatura   | Configuração medida           |
-| :----: | :-----------: | :---------------------------- |
-| USD 23 | Neutro quente | Única (sem filtros ou chaves) |
+| Preço | Quanto paguei | Assinatura | Configuração medida |
+| :---: | :---: | :---: | :--- |
+| USD 23 | R$ 210 | Neutro quente | Única (sem filtros ou chaves) |
 
 ## Resposta em frequência
 
