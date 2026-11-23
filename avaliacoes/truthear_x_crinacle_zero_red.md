@@ -4,7 +4,7 @@
 
 | Preço | Quanto paguei | Assinatura | Configuração medida |
 | :---: | :---: | :---: | :--- |
-| USD 55 | R$ 359 | Neutro | Única (sem filtros ou chaves) |
+| USD 55 | R$ 359 (Aliexpress) | Neutro | Única (sem filtros ou chaves) |
 
 ## Resposta em frequência
 
