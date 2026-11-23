@@ -2,9 +2,9 @@
 
 [← Voltar ao ranking](../README.md)
 
-| Preço  |    Assinatura    | Configuração medida |
-| :----: | :--------------: | :------------------ |
-| USD 50 | Neutro brilhante | Chaves em 1110      |
+| Preço | Quanto paguei | Assinatura | Configuração medida |
+| :---: | :---: | :---: | :--- |
+| USD 50 | R$ 399 | Neutro brilhante | Chaves em 1110      |
 
 ## Resposta em frequência
 
