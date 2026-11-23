@@ -4,7 +4,7 @@
 
 | Preço | Quanto paguei | Assinatura | Configuração medida |
 | :---: | :---: | :---: | :--- |
-| USD 49 | R$ 300 | Neutro quente | Filtro prata        |
+| USD 49 | R$ 300 (Mercado Livre) | Neutro quente | Filtro prata        |
 
 ## Resposta em frequência
 
