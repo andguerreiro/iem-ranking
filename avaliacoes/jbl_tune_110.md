@@ -2,9 +2,9 @@
 
 [← Voltar ao ranking](../README.md)
 
-| Preço | Assinatura | Configuração medida |
-| :---: | :---: | :--- |
-| USD 15 | Baixudo | Única (cabo fixo, sem filtros ou chaves) |
+| Preço | Quanto paguei | Assinatura | Configuração medida |
+| :---: | :---: | :---: | :--- |
+| USD 15 | R$ 89 | Baixudo | Única (cabo fixo, sem filtros ou chaves) |
 
 ## Resposta em frequência
 
