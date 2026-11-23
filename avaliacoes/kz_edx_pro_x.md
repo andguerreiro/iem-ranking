@@ -4,7 +4,7 @@
 
 | Preço | Quanto paguei | Assinatura | Configuração medida |
 | :---: | :---: | :---: | :--- |
-| USD 10 | R$ 69 | Em V | Única (sem filtros ou chaves) |
+| USD 10 | R$ 69 (Mercado Livre) | Em V | Única (sem filtros ou chaves) |
 
 ## Resposta em frequência
 
