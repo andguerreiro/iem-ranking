@@ -14,9 +14,9 @@
 
 | Banda | Desvio médio | Nota |
 | :--- | :---: | :---: |
-| Graves | ~0.9 dB | 4.6 |
-| Médios | ~1.3 dB | 4.2 |
-| Agudos | ~4.6 dB | 1.0 |
+| Graves (20 a 250 Hz) | ~0.9 dB | 4.6 |
+| Médios (250 Hz a 4 kHz) | ~1.3 dB | 4.2 |
+| Agudos (4 a 10 kHz) | ~4.6 dB | 1.0 |
 | **Média** | | **3.27** |
 
 | Desvio total (20 Hz–10 kHz) | Desvio máximo | Frequência do desvio máximo |
