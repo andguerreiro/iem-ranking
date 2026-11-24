@@ -12,11 +12,14 @@ ARQ_README = RAIZ / "README.md"
 ARQ_COMPARATIVO = RAIZ / "comparativo.csv"
 DIR_AVALIACOES = RAIZ / "avaliacoes"
 
-ROTULOS = {"Graves": "Graves", "Medios": "Médios", "Agudos": "Agudos"}
+ROTULOS = {
+    "Graves": "Graves",
+    "Medios": "Médios",
+    "Agudos": "Agudos",
+}
 ROTULO_SOM = "Média"
 LIMITE_BOCAL_MM = 6.0
 TOL = 0.05 + 1e-9
-TOL_FREQ_HZ = 250
 
 NOTA_MAX, NOTA_MIN = 5.0, 1.0
 DESVIO_NOTA_MAX = 0.5
@@ -64,8 +67,10 @@ def valor_medida(texto):
     )
     if not m:
         raise ValueError(f"valor não numérico: '{texto}'")
+
     num = float(m.group(1).replace(",", "."))
     unidade = (m.group(2) or "").lower()
+
     if unidade == "khz":
         return num * 1000.0
     return num
@@ -108,12 +113,15 @@ def linhas(texto):
         linha = linha.strip()
         if not linha.startswith("|"):
             continue
+
         celulas = [
             c.strip().replace("**", "").strip()
             for c in linha.strip("|").split("|")
         ]
+
         if not all(re.fullmatch(r":?-+:?", c) for c in celulas):
             saida.append(celulas)
+
     return saida
 
 
@@ -134,6 +142,7 @@ def apos(tabela, cabecalho):
             a.startswith(b) for a, b in zip(atual, cabecalho)
         ):
             return seguinte
+
     raise AvaliacaoInvalida(
         f"tabela '{' | '.join(cabecalho)}' não encontrada"
     )
@@ -150,7 +159,8 @@ def pendentes(texto):
         texto,
     ))
     n += len(re.findall(
-        r"(?m)^\*Geral = \([^)]*\bX\b[^)]*\)", texto
+        r"(?m)^\*Geral = \([^)]*\bX\b[^)]*\)",
+        texto,
     ))
     return n
 
@@ -214,11 +224,17 @@ def montar_linha(caminho):
             f"{n} campo(s) ainda com 'X' em {nome_md}"
         )
 
-    preco_txt, assinatura = apos(
-        linhas(texto), ["Preço", "Assinatura"]
-    )[:2]
+    # Formato:
+    # | Preço | Quanto paguei | Assinatura | Configuração medida |
+    # | USD 15 | R$ 89 (...) | Baixudo | Única (...) |
+    info = apos(
+        linhas(texto),
+        ["Preço", "Quanto paguei", "Assinatura", "Configuração medida"],
+    )
 
-    assinatura = assinatura.strip()
+    preco_txt = info[0]
+    assinatura = info[2].strip()
+
     if not assinatura or assinatura == "X":
         raise AvaliacaoInvalida(f"assinatura não preenchida em {nome_md}")
 
@@ -246,12 +262,29 @@ def montar_linha(caminho):
     )
 
     sec_bandas = linhas(secao(texto, "Avaliação do som"))
-    bandas_md = {r[0]: r[1:] for r in sec_bandas}
 
-    som_linha = bandas_md.get(ROTULO_SOM, [])
+    # Formato:
+    # | Banda | Desvio médio | Nota |
+    # | Graves (20 a 250 Hz) | ~7.5 dB | 1.0 |
+    # | Médios (250 Hz a 4 kHz) | ~2.2 dB | 3.3 |
+    # | Agudos (4 a 10 kHz) | ~4.8 dB | 1.0 |
+    # | **Média** |  | **1.77** |
+    def linha_banda(prefixo):
+        for r in sec_bandas:
+            if len(r) >= 3 and r[0].startswith(prefixo):
+                return r[1:3]
+        return None
+
+    bandas_md = {
+        "Graves": linha_banda("Graves"),
+        "Medios": linha_banda("Médios"),
+        "Agudos": linha_banda("Agudos"),
+    }
+
+    som_linha = linha_banda(ROTULO_SOM)
     som_md = (
         numero(som_linha[1])
-        if len(som_linha) > 1 and som_linha[1]
+        if som_linha and som_linha[1]
         else None
     )
 
@@ -319,11 +352,14 @@ def montar_linha(caminho):
     notas = {}
 
     for banda, rotulo in ROTULOS.items():
-        if rotulo not in bandas_md or len(bandas_md[rotulo]) < 2:
+        linha = bandas_md[banda]
+
+        if not linha or len(linha) < 2:
             raise AvaliacaoInvalida(
                 f"banda '{rotulo}' ausente ou incompleta em {nome_md}"
             )
-        desvio_txt, nota_txt = bandas_md[rotulo][:2]
+
+        desvio_txt, nota_txt = linha
         desvio_val = valor_medida(desvio_txt)
         desvios_bandas[banda] = desvio_val
 
@@ -361,6 +397,7 @@ def montar_linha(caminho):
             "Uso": uso,
         }
         termos = [t.strip() for t in formula.group(1).split("+")]
+
         if len(termos) != 4:
             avisos.append(
                 f"fórmula da Nota geral no .md "
@@ -370,6 +407,7 @@ def montar_linha(caminho):
             for termo in termos:
                 if termo in valores_esperados:
                     continue
+
                 try:
                     valor_termo = numero(termo)
                 except ValueError:
@@ -378,6 +416,7 @@ def montar_linha(caminho):
                         f"({formula.group(1)}) contém termo inválido: '{termo}'."
                     )
                     break
+
                 if valor_termo not in valores_esperados.values():
                     avisos.append(
                         f"fórmula da Nota geral no .md "
